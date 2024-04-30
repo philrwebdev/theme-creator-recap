@@ -28,6 +28,12 @@ export default function ColorForm({ onAddColor }) {
     event.target.reset();
   }
 
+  function handleDeleteColor() {
+    console.log(color.id);
+    setColor(colors.filter((scheme) => scheme.id !== color));
+    // setInputValue(event.target.value);
+  }
+
   return (
     <form className="color-form" onSubmit={handleSubmit}>
       <br />
