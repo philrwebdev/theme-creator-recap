@@ -5,6 +5,7 @@ import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({
   onAddColor,
+  // onEditColor,
   initialData = {
     role: "Primary main",
     hex: "#595959",
@@ -13,7 +14,6 @@ export default function ColorForm({
   editMode,
   onExitEditMode,
 }) {
-  
   function handleSubmit(event) {
     event.preventDefault();
 
