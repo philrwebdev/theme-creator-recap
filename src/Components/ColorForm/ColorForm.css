@@ -20,15 +20,19 @@
 }
 
 .color-form_field_legend {
-  color: var(--color-text-light);
+  color: var(--color-primary);
   padding: 0.3rem 0.8rem;
   font-size: 1.2rem;
   font-weight: bold;
-  background: var(--color-primary);
+  background: white;
   border-radius: 0.5rem;
+  border-color: var(--color-primary);
+  border-style: solid;
 }
 
-.color-form_submit {
+.color-form_submit,
+.color-form_cancel-edit {
+  margin: 0.5rem;
   padding: 0.5rem 1rem;
   background: var(--color-primary-light);
   color: var(--color-text-light);
@@ -40,7 +44,8 @@
   /* justify-self: center; */
 }
 
-.color-form_submit:hover {
+.color-form_submit:hover,
+.color-form_cancel-edit:hover {
   cursor: pointer;
   background: var(--color-primary);
 }
