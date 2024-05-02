@@ -21,6 +21,29 @@ export default function Color({ color, onDeleteColor, onEditMode }) {
     );
   }
 
+  function renderDefaultButtons() {
+    return (
+      <>
+        <button
+          type="button"
+          className="color_delete"
+          onClick={() =>
+            deleteMode ? onDeleteColor(color.id) : setDeleteMode(true)
+          }
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          className="color_edit"
+          onClick={() => setEditMode(true)}
+        >
+          Edit
+        </button>
+      </>
+    );
+  }
+
   return (
     <div
       className="color-card"
@@ -34,23 +57,7 @@ export default function Color({ color, onDeleteColor, onEditMode }) {
       <p>contrast: {color.contrastText}</p>
       {deleteMode ? renderConfirm() : ""}
 
-      <button
-        type="button"
-        className="color_delete"
-        onClick={() =>
-          deleteMode ? onDeleteColor(color.id) : setDeleteMode(true)
-        }
-      >
-        Delete
-      </button>
-
-      <button
-        type="button"
-        className="color_edit"
-        onClick={() => setEditMode(true)}
-      >
-        Edit
-      </button>
+      {!editMode ? renderDefaultButtons() : ""}
 
       {editMode ? (
         <ColorForm
