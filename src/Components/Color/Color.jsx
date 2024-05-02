@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ color, onDeleteColor, onEditMode }) {
+export default function Color({ color, onDeleteColor, onEditColor }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
@@ -61,7 +61,7 @@ export default function Color({ color, onDeleteColor, onEditMode }) {
 
       {editMode ? (
         <ColorForm
-          onAddColor={onEditMode}
+          onAddColor={onEditColor}
           initialData={color}
           editMode={editMode}
           onExitEditMode={handleExitEditMode}

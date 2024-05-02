@@ -13,6 +13,7 @@ export default function ColorForm({
   editMode,
   onExitEditMode,
 }) {
+  
   function handleSubmit(event) {
     event.preventDefault();
 

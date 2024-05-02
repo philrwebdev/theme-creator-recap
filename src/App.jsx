@@ -24,7 +24,7 @@ function App() {
     setColors(colors.filter((color) => color.id !== id));
   }
 
-  function handleEditMode(colorEdited) {
+  function handleEditColor(colorEdited) {
     setColors(
       colors.map((color) => {
         if (color.id === colorEdited.id) return colorEdited;
@@ -47,7 +47,7 @@ function App() {
               color={color}
               id={color.id}
               onDeleteColor={handleDeleteColor}
-              onEditMode={handleEditMode}
+              onEditColor={handleEditColor}
             />
           );
         })
