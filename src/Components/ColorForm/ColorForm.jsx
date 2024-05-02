@@ -1,37 +1,33 @@
 import "../Color/Color.css";
 import "../ColorForm/ColorForm.css";
 
-import { uid } from "uid";
-import { useState } from "react";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onAddColor }) {
-  const initialData = {
-    id: uid(),
+export default function ColorForm({
+  onAddColor,
+  initialData = {
     role: "Primary main",
     hex: "#595959",
     contrastText: "#FFFFFF",
-  };
-
-  const [color, setColor] = useState(initialData.hex);
-  const [contrast, setContrast] = useState(initialData.contrastText);
-
+  },
+  editMode,
+  onExitEditMode,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    const newColor = { id: uid(), ...data };
+    if (editMode) {
+      data.id = initialData.id;
+    }
 
-    onAddColor(newColor);
-    event.target.reset();
-  }
+    onAddColor(data);
 
-  function handleDeleteColor() {
-    console.log(color.id);
-    setColor(colors.filter((scheme) => scheme.id !== color));
-    // setInputValue(event.target.value);
+    if (editMode) {
+      onExitEditMode();
+    }
   }
 
   return (
@@ -39,7 +35,9 @@ export default function ColorForm({ onAddColor }) {
       <br />
 
       <fieldset className="color-form_field">
-        <legend className="color-form_field_legend">Create your theme</legend>
+        <legend className="color-form_field_legend">
+          {editMode ? "Edit color" : "Create your color"}
+        </legend>
         <label htmlFor="role">Role</label>
         <br />
         <input
@@ -62,8 +60,20 @@ export default function ColorForm({ onAddColor }) {
         <br />
 
         <button type="submit" className="color-form_submit">
-          Add Theme
+          {editMode ? "Edit" : "Add Color"}
         </button>
+
+        {editMode ? (
+          <button
+            type="button"
+            className="color-form_cancel-edit"
+            onClick={onExitEditMode}
+          >
+            Cancel
+          </button>
+        ) : (
+          ""
+        )}
         <br />
       </fieldset>
       <br />
