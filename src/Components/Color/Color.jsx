@@ -1,13 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let timeoutId;
+    if (copied) {
+      timeoutId = setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [copied]);
 
   function handleExitEditMode() {
     setEditMode(false);
+  }
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(color.hex);
+      setCopied(true);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   function renderConfirm() {
@@ -44,6 +67,14 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
     );
   }
 
+  function renderCopyButton() {
+    return (
+      <button type="button" className="color_copy" onClick={handleCopy}>
+        {copied ? "Copied to clipboard!" : "Copy"}
+      </button>
+    );
+  }
+
   return (
     <div
       className="color-card"
@@ -53,8 +84,10 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       }}
     >
       <h3 className="color-card-headline">{color.hex}</h3>
+      {renderCopyButton()}
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+
       {deleteMode ? renderConfirm() : ""}
 
       {!editMode ? renderDefaultButtons() : ""}
