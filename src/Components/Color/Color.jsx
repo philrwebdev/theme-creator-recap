@@ -89,8 +89,6 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       <ContrastCheck colors={[color.hex, color.contrastText]} />
-      {/* <ContrastCheck /> */}
-
 
       {deleteMode ? renderConfirm() : ""}
 
@@ -98,7 +96,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
       {editMode ? (
         <ColorForm
-          onAddColor={onEditColor}
+          onEditColor={onEditColor}
           initialData={color}
           editMode={editMode}
           onExitEditMode={handleExitEditMode}

@@ -5,7 +5,7 @@ import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({
   onAddColor,
-  // onEditColor,
+  onEditColor,
   initialData = {
     role: "Primary main",
     hex: "#595959",
@@ -22,12 +22,10 @@ export default function ColorForm({
 
     if (editMode) {
       data.id = initialData.id;
-    }
-
-    onAddColor(data);
-
-    if (editMode) {
       onExitEditMode();
+      onEditColor(data);
+    } else {
+      onAddColor(data);
     }
   }
 
