@@ -36,7 +36,7 @@ function App() {
     <>
       <h1>Theme Creator</h1>
 
-      <ColorForm onAddColor={handleAddColor} colorEditedMode={false} />
+      <ColorForm onAddColor={handleAddColor} />
 
       {colors.length > 0 ? (
         colors.map((color) => {
