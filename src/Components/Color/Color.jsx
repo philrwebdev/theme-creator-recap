@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
+import ContrastCheck from "../ContrastCheck";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [deleteMode, setDeleteMode] = useState(false);
@@ -87,6 +88,9 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       {renderCopyButton()}
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      <ContrastCheck colors={[color.hex, color.contrastText]} />
+      {/* <ContrastCheck /> */}
+
 
       {deleteMode ? renderConfirm() : ""}
 
