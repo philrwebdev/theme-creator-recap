@@ -8,12 +8,13 @@ export default function ColorForm({
   onEditColor,
   initialData = {
     role: "Primary main",
-    hex: "#595959",
+    hex: "#595959", 
     contrastText: "#FFFFFF",
   },
   editMode,
   onExitEditMode,
 }) {
+
   function handleSubmit(event) {
     event.preventDefault();
 
