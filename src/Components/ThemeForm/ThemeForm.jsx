@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "../Color/Color.css";
 import "../ColorForm/ColorForm.css";
+import CopyThemeButton from "./CopyThemeButton";
 
 export default function ThemeForm({
   themes,
+  currentColors,
   currentThemeId,
   onAddTheme,
   onEditTheme,
@@ -68,6 +70,8 @@ export default function ThemeForm({
           >
             Delete
           </button>
+          <br/>
+          <CopyThemeButton colors={currentColors} />
         </>
       ) : (
         ""
