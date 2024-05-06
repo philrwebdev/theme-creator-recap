@@ -29,8 +29,6 @@ function App() {
     colors.find((color) => color.id === colorId)
   );
 
-  // const currentColors = colors.filter((color) => currentTheme.colors.includes(color.id));
-
   function handleChangeTheme(id) {
     setCurrentThemeId(id);
   }
@@ -52,7 +50,7 @@ function App() {
   function handleEditTheme(id, newName) {
     setThemes(
       themes.map((theme) => {
-        if (theme.id === id) return {...theme, name: newName};
+        if (theme.id === id) return { ...theme, name: newName };
         return theme;
       })
     );
@@ -103,6 +101,7 @@ function App() {
 
       <ThemeForm
         themes={themes}
+        currentColors={currentColors}
         currentThemeId={currentThemeId}
         onAddTheme={handleAddTheme}
         onDeleteTheme={handleDeleteTheme}
