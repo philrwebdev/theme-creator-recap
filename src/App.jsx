@@ -33,6 +33,7 @@ function App() {
     setCurrentThemeId(id);
   }
 
+
   function handleAddTheme(newName) {
     const newId = uid();
     setThemes([{ id: newId, colors: [], name: newName }, ...themes]);

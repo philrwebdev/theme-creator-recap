@@ -19,9 +19,9 @@ export default function CopyThemeButton({ colors }) {
   async function handleThemeCopy() {
     const themeCss = `:root {${colors
       .map((color, index) => {
-        const lineEnd = index < colors.length - 1 ? ",\n" : ",";
+        const lineEnd = index < colors.length - 1 ? ";\n" : ";";
         const col = `${
-          "--" + color.role.replace(" ", "-") + ":" + color.hex + ",\n"
+          "--" + color.role.replace(" ", "-") + ":" + color.hex + ";\n"
         }`;
         const contrast = `${
           "--" +
@@ -53,3 +53,4 @@ export default function CopyThemeButton({ colors }) {
     </button>
   );
 }
+
