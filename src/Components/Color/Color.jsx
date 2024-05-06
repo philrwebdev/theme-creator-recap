@@ -3,7 +3,7 @@ import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 import ContrastCheck from "../ContrastCheck";
 
-export default function Color({ color, onDeleteColor, onEditColor }) {
+export default function Color({ color, onDeleteColor, onEditColor, currentThemeId }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -34,48 +34,6 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
     }
   }
 
-  function renderConfirm() {
-    return (
-      <>
-        <h3 className="color-card-confirm">Really delete?</h3>
-        <button type="button" onClick={() => setDeleteMode(false)}>
-          Cancel
-        </button>
-      </>
-    );
-  }
-
-  function renderDefaultButtons() {
-    return (
-      <>
-        <button
-          type="button"
-          className="color_delete"
-          onClick={() =>
-            deleteMode ? onDeleteColor(color.id) : setDeleteMode(true)
-          }
-        >
-          Delete
-        </button>
-        <button
-          type="button"
-          className="color_edit"
-          onClick={() => setEditMode(true)}
-        >
-          Edit
-        </button>
-      </>
-    );
-  }
-
-  function renderCopyButton() {
-    return (
-      <button type="button" className="color_copy" onClick={handleCopy}>
-        {copied ? "Copied to clipboard!" : "Copy"}
-      </button>
-    );
-  }
-
   return (
     <div
       className="color-card"
@@ -85,14 +43,47 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       }}
     >
       <h3 className="color-card-headline">{color.hex}</h3>
-      {renderCopyButton()}
+      <button type="button" className="color_copy" onClick={handleCopy}>
+        {copied ? "Copied to clipboard!" : "Copy"}
+      </button>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       <ContrastCheck colors={[color.hex, color.contrastText]} />
+      <br />
 
-      {deleteMode ? renderConfirm() : ""}
+      {deleteMode ? (
+        <>
+          <h3 className="color-card-confirm">Really delete?</h3>
+          <button type="button" onClick={() => setDeleteMode(false)}>
+            Cancel
+          </button>
+        </>
+      ) : (
+        ""
+      )}
 
-      {!editMode ? renderDefaultButtons() : ""}
+      {!editMode ? (
+        <>
+          <button
+            type="button"
+            className="color_delete"
+            onClick={() =>
+              deleteMode ? onDeleteColor(color.id, currentThemeId) : setDeleteMode(true)
+            }
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            className="color_edit"
+            onClick={() => setEditMode(true)}
+          >
+            Edit
+          </button>
+        </>
+      ) : (
+        ""
+      )}
 
       {editMode ? (
         <ColorForm

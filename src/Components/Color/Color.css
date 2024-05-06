@@ -19,7 +19,7 @@
 
 .color-card_contrast-score {
   display: inline-block;
-  margin-right: 0.3rem;
+  margin: 0.3rem 0rem;
   padding: 0.2rem 0.2rem;
   background: white;
   color: black;
